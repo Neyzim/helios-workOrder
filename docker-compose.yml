@@ -8,6 +8,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/helios
       SPRING_DATASOURCE_USERNAME: helios_admin
       SPRING_DATASOURCE_PASSWORD: 1234567890
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     networks:
       - helios-network
 
