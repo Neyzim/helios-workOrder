@@ -16,7 +16,7 @@ public class WorkOrder {
     private LocalDateTime startedAt;
     private String type;
 
-    public WorkOrder createNew(Long id, String title, String description, LocalDateTime createdAt, LocalDateTime finishedAt, Long serviceId, String serviceName, LocalDateTime startedAt) {
+    public static WorkOrder createNew(Long id, String title, String description, LocalDateTime createdAt, LocalDateTime finishedAt, Long serviceId, String serviceName, LocalDateTime startedAt, String type) {
         WorkOrder workOrder =  new WorkOrder();
         workOrder.id = id;
         workOrder.title = title;
@@ -26,6 +26,7 @@ public class WorkOrder {
         workOrder.serviceId = serviceId;
         workOrder.serviceName = serviceName;
         workOrder.startedAt = startedAt;
+        workOrder.type = type;
         return workOrder;
     }
 
@@ -91,5 +92,13 @@ public class WorkOrder {
 
     public void setStartedAt(LocalDateTime startedAt) {
         this.startedAt = startedAt;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
