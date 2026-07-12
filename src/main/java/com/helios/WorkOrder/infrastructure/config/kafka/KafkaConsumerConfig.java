@@ -21,7 +21,7 @@ import java.util.Map;
 @EnableKafka
 public class KafkaConsumerConfig {
 
-    @Value("${spring.kafka.boostrap-servers}")
+    @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
     @Value("${spring.kafka.consumer.group-id}")
@@ -40,7 +40,7 @@ public class KafkaConsumerConfig {
         props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JacksonJsonDeserializer.class);
 
         props.put(JacksonJsonDeserializer.TRUSTED_PACKAGES, "*");
-        props.put(JacksonJsonDeserializer.USE_TYPE_INFO_HEADERS, false);
+        props.put(JacksonJsonDeserializer.USE_TYPE_INFO_HEADERS, "com.helios.WorkOrder.infrastructure.dto.ServiceEventDto.java");
 
         return new DefaultKafkaConsumerFactory<>(props);
     }
@@ -52,8 +52,7 @@ public class KafkaConsumerConfig {
         factory.setConsumerFactory(consumerFactory());
 
 
-        // tenta reprocessar a mensagem 3 vezes com 1s de intervalo
-        // antes de desistir e mandar para o error handler
+
         factory.setCommonErrorHandler(
                 new DefaultErrorHandler(new FixedBackOff(1000L, 3))
         );
