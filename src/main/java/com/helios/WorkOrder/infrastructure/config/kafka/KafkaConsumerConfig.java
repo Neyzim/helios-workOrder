@@ -38,9 +38,10 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         props.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
         props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JacksonJsonDeserializer.class);
+        props.put(JacksonJsonDeserializer.VALUE_DEFAULT_TYPE,  "com.helios.WorkOrder.infrastructure.dto.ServiceEventDto");
 
         props.put(JacksonJsonDeserializer.TRUSTED_PACKAGES, "*");
-        props.put(JacksonJsonDeserializer.USE_TYPE_INFO_HEADERS, "com.helios.WorkOrder.infrastructure.dto.ServiceEventDto.java");
+        props.put(JacksonJsonDeserializer.USE_TYPE_INFO_HEADERS, false);
 
         return new DefaultKafkaConsumerFactory<>(props);
     }
