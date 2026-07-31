@@ -6,6 +6,6 @@ public record ServiceEventDto(
          Long serviceId,
          String serviceName,
          LocalDateTime startedAt,
-         String type
+         String status
 ) {
 }
