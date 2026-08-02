@@ -4,6 +4,9 @@ import com.helios.WorkOrder.core.domain.WorkOrder;
 import com.helios.WorkOrder.infrastructure.persistency.entities.WorkOrderEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class WorkOrderMap {
 
@@ -35,5 +38,11 @@ public class WorkOrderMap {
                 coreEntity.getType()
         );
         return infraEntity;
+    }
+
+    public List<WorkOrder> listToCore(List<WorkOrderEntity> entity){
+        return entity.stream()
+                .map(this::toCoreEntity)
+                .collect(Collectors.toList());
     }
 }
