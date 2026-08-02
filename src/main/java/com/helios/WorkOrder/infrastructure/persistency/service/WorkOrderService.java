@@ -6,6 +6,7 @@ import com.helios.WorkOrder.infrastructure.dto.ServiceEventDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class WorkOrderService {
@@ -27,19 +28,23 @@ public class WorkOrderService {
                 event.serviceId(),
                 event.serviceName(),
                 event.startedAt(),
-                event.type()
+                event.status()
         );
 
         workOrderRepository.save(workOrder);
 
     }
 
-
     public String generateTitle(ServiceEventDto service){
         return "Ordem de Serviço - " + service.serviceName();
     }
 
     public String generateDescrition(ServiceEventDto serviceEventDto){
-        return "Gerada automaticamente a partir do evento de tipo: " + serviceEventDto.type();
+        return "Gerada automaticamente a partir do evento de tipo: " + serviceEventDto.status();
+    }
+
+    public Optional<WorkOrder> searchOrderPerId(Long id){
+        Optional<WorkOrder> order = workOrderRepository.findWorkOrderById(id);
+        return order;
     }
 }
